@@ -232,3 +232,160 @@ func TestRepeatBy(t *testing.T) {
 	r2 := lo.RepeatBy(5, callback)
 	fmt.Println(r2)
 }
+
+type Character struct {
+	dir  string
+	code int
+}
+
+func TestKeyBy(t *testing.T) {
+	// 1
+	data := []string{"a", "aa", "aaa"}
+	callback := func(str string) int {
+		return len(str)
+	}
+
+	m := lo.KeyBy(data, callback)
+	fmt.Println(m)
+
+	// 2
+	characters := []Character{
+		{dir: "left", code: 97},
+		{dir: "right", code: 100},
+	}
+
+	callback2 := func(char Character) string {
+		return string(rune(char.code))
+	}
+
+	result := lo.KeyBy(characters, callback2)
+	fmt.Println(result)
+}
+
+func TestDrop(t *testing.T) {
+	data := []int{0, 1, 2, 3, 4, 5, 6}
+	l := lo.Drop(data, 2)
+	fmt.Println(l)
+}
+
+func TestDropRight(t *testing.T) {
+	data := []int{0, 1, 2, 3, 4, 5, 6}
+
+	dr := lo.DropRight(data, 2)
+	fmt.Println(dr)
+}
+
+func TestDropWhile(t *testing.T) {
+	data := []string{"a", "aa", "aaa", "aa", "aa"}
+	callback := func(str string) bool { return len(str) <= 2 }
+
+	dw := lo.DropWhile(data, callback)
+	fmt.Println(dw)
+}
+
+func TestDropRightWhile(t *testing.T) {
+	data := []string{"a", "aa", "aaa", "aa", "aa"}
+	callback := func(str string) bool { return len(str) <= 2 }
+
+	drw := lo.DropRightWhile(data, callback)
+	fmt.Println(drw)
+}
+
+func TestReject(t *testing.T) {
+	data := []int{1, 2, 3, 4}
+	callback := func(x int, _ int) bool { return x%2 == 0 }
+
+	odd := lo.Reject(data, callback)
+	fmt.Println(odd)
+}
+
+func TestCounters(t *testing.T) {
+	data := []int{1, 2, 3, 4, 1, 1, 2}
+	count := lo.Count(data, 1)
+	fmt.Println(count)
+}
+
+func TestCountBy(t *testing.T) {
+	data := []int{1, 2, 3, 4, 5}
+	callback := func(x int) bool { return x <= 3 }
+
+	count := lo.CountBy(data, callback)
+	fmt.Println(count)
+}
+
+func TestSubset(t *testing.T) {
+	data := []int{0, 1, 2, 3, 4, 5}
+
+	sub := lo.Subset(data, 2, 3)
+	fmt.Println(sub)
+
+	sub2 := lo.Subset(data, -4, 3)
+	fmt.Println(sub2)
+
+	sub3 := lo.Subset(data, -2, math.MaxUint)
+	fmt.Println(sub3)
+}
+
+func TestReplace(t *testing.T) {
+	data := []int{0, 1, 0, 1, 2, 3, 0}
+
+	var s []int
+	s = lo.Replace(data, 0, 42, 1)
+	fmt.Println(s)
+
+	s = lo.Replace(data, -1, 42, 1)
+	fmt.Println(s)
+
+	s = lo.Replace(data, 0, 42, 2)
+	fmt.Println(s)
+
+	s = lo.Replace(data, 0, 42, -1)
+	fmt.Println(s)
+}
+
+func TestReplaceAll(t *testing.T) {
+	data := []int{0, 1, 0, 1, 2, 3, 0}
+	var s []int
+
+	s = lo.ReplaceAll(data, 0, 42)
+	fmt.Println(s)
+
+	s = lo.ReplaceAll(data, -1, 42)
+	fmt.Println(s)
+}
+
+func TestKeys(t *testing.T) {
+	data := map[string]int{"foo": 1, "bar": 2}
+
+	keys := lo.Keys(data)
+	fmt.Println(keys)
+}
+
+func TestValues(t *testing.T) {
+	data := map[string]int{"foo": 1, "bar": 2}
+
+	values := lo.Values(data)
+	fmt.Println(values)
+}
+
+func TestPickBy(t *testing.T) {
+	data := map[string]int{"foo": 1, "bar": 2, "baz": 3}
+	callback := func(key string, value int) bool { return value%2 == 1 }
+
+	m := lo.PickBy(data, callback)
+	fmt.Println(m)
+}
+
+func TestPickByKeys(t *testing.T) {
+	data := map[string]int{"foo": 1, "bar": 2, "baz": 3}
+	keys := []string{"foo", "bar"}
+	m := lo.PickByKeys(data, keys)
+	fmt.Println(m)
+}
+
+func TestPickByValues(t *testing.T) {
+	data := map[string]int{"foo": 1, "bar": 2, "baz": 3, "bal": 3}
+	keys := []int{1, 3}
+	m := lo.PickByValues(data, keys)
+	fmt.Println(m)
+}
