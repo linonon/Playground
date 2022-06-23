@@ -94,4 +94,10 @@ func TestDifference(t *testing.T) {
 	fmt.Println(l, r)
 }
 
-func TestUnion(t *testing.T) {}
+func TestUnion(t *testing.T) {
+	l1 := []int{0, 1, 2, 3, 4, 5}
+	l2 := []int{0, 2, 6, 4}
+
+	union := lo.Union(l1, l2)
+	fmt.Println(union)
+}
