@@ -4,6 +4,7 @@ func main() {
 
 }
 
+// LevenshteinDistanceV1 version 1
 func LevenshteinDistanceV1(s1, s2 string) int {
 	if s1 == "" {
 		return len(s2)
@@ -46,6 +47,7 @@ func LevenshteinDistanceV1(s1, s2 string) int {
 	return distance[len1-1][len2-1]
 }
 
+// LevenshteinDistanceV2 version 2
 func LevenshteinDistanceV2(s1, s2 string) int {
 	if s1 == "" {
 		return len(s2)
