@@ -1,0 +1,14 @@
+[CaishendaoInput]
+type="LogstreamerInput"
+log_directory = "/var/log/caishendao"
+file_match = 'track\.json'
+decoder = "CaishendaoDecoder"
+
+[CaishendaoDecoder]
+type = "SandboxDecoder"
+filename = "lua_decoders/game_caishendaodecoder.lua"
+
+[CaishendaoOutput]
+message_matcher = "Type == 'common'"
+mongo_addr = ["172.31.0.253:27017"]
+

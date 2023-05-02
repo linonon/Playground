@@ -1,0 +1,14 @@
+[FlowerInput]
+type="LogstreamerInput"
+log_directory = "/var/log/flower"
+file_match = 'track\.json'
+decoder = "FlowerDecoder"
+
+[FlowerDecoder]
+type = "SandboxDecoder"
+filename = "lua_decoders/game_flowerdecoder.lua"
+
+[FlowerOutput]
+message_matcher = "Type == 'common'"
+mongo_addr = ["172.31.0.253:27017"]
+
