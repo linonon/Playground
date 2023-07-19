@@ -30,4 +30,20 @@ func main() {
 	a2.SetB(4.0)
 	b2.SetB(5)                  // active
 	fmt.Println("a2.f: ", a2.f) // 5.0
+
+	a3 := A1{B{
+		f: 1,
+	}}
+	a3.SetB(6.0)
+	a3.B.SetB(7)                // active
+	b3 := a3.B                  // disactive
+	b3.SetB(9)                  // disactive
+	fmt.Println("a3.f: ", a3.f) // 5.0
+
+	a4 := A2{&B{
+		f: 1,
+	}}
+	a4.SetB(8.0)
+	a4.B.SetB(9)                // active
+	fmt.Println("a4.f: ", a4.f) // 5.0
 }
